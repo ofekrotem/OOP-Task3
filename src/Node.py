@@ -1,9 +1,9 @@
 class Node:
     def __init__(self, id: int, x: float, y: float, z: float):
-        self.id = id;
-        self.x = x;
-        self.y = y;
-        self.z = z;
+        self.id = id
+        self.x = x
+        self.y = y
+        self.z = z
         self.tag = 0
 
     def get_id(self) -> int:
@@ -21,5 +21,11 @@ class Node:
     def get_tag(self) -> int:
         return self.tag
 
-    def set_tag(self, ntag: int):
-        self.tag = ntag
+    def set_tag(self, n_tag: int):
+        self.tag = n_tag
+
+    def __eq__(self, other):
+        if ((self.id == other.id) and (self.tag == other.tag) and (self.x == other.x) and (self.y == other.y) and (
+                self.z == other.z)):
+            return True
+        return False

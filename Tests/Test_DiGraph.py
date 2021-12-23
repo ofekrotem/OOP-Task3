@@ -1,0 +1,104 @@
+from unittest import TestCase
+
+from src.DiGraph import DiGraph
+from src.Edge import Edge
+from src.Node import Node
+
+n1 = Node(1, 1.1, 2.1, 3.1)
+n2 = Node(2, 1.2, 2.2, 3.2)
+n3 = Node(3, 1.3, 2.3, 3.3)
+n4 = Node(4, 1.4, 2.4, 3.4)
+
+e12 = Edge(n1, n2, 1.12)
+e13 = Edge(n1, n3, 1.13)
+e21 = Edge(n2, n1, 1.21)
+e24 = Edge(n2, n4, 1.24)
+e31 = Edge(n3, n1, 1.31)
+e34 = Edge(n3, n4, 1.34)
+e41 = Edge(n4, n1, 1.41)
+e43 = Edge(n4, n3, 1.43)
+
+Nodes = {}
+Nodes[1] = n1
+Nodes[2] = n2
+Nodes[3] = n3
+Nodes[4] = n4
+
+all_edges = {}
+s12 = "1,2"
+s13 = "1,3"
+s21 = "2,1"
+s24 = "2,4"
+s31 = "3,1"
+s34 = "3,4"
+s41 = "4,1"
+s43 = "4,3"
+all_edges[s12] = e12
+all_edges[s13] = e13
+all_edges[s21] = e21
+all_edges[s24] = e24
+all_edges[s31] = e31
+all_edges[s34] = e34
+all_edges[s41] = e41
+all_edges[s43] = e43
+
+edges_out = {}
+edges_out.get(1).update({2: e12})
+edges_out.get(1).update({3: e13})
+edges_out.get(2).update({1: e21})
+edges_out.get(2).update({4: e24})
+edges_out.get(3).update({1: e31})
+edges_out.get(3).update({4: e34})
+edges_out.get(4).update({1: e41})
+edges_out.get(4).update({3: e43})
+
+edges_in = {}
+edges_in.get(1).update({2: e21})
+edges_in.get(1).update({3: e31})
+edges_in.get(1).update({4: e41})
+edges_in.get(3).update({1: e13})
+edges_in.get(3).update({4: e43})
+edges_in.get(4).update({2: e24})
+edges_in.get(4).update({3: e34})
+
+g1 = DiGraph(Nodes, edges_in, edges_out, all_edges)
+
+
+class TestGraph(TestCase):
+    def test_v_size(self):
+        self.assertEqual(4, g1.v_size())
+
+    def test_e_size(self):
+        self.assertEqual(8, g1.e_size())
+
+    def test_get_all_v(self):
+        nodes = g1.get_all_v()
+        self.assertEqual(n1,nodes[1])
+        self.assertEqual(n2, nodes[2])
+        self.assertEqual(n3, nodes[3])
+        self.assertEqual(n4, nodes[4])
+
+    def all_in_edges_of_node(self):
+        id=1
+        in_edges1=g1.all_in_edges_of_node(id)
+        self.assertEqual(e21, in_edges1.get())
+        self.assertEqual(e31, in_edges1[1])
+        self.assertEqual(e41, in_edges1[1])
+
+    def all_out_edges_of_node(self):
+        pass
+
+    def get_mc(self):
+        pass
+
+    def test_add_edge(self):
+        pass
+
+    def test_add_node(self):
+        pass
+
+    def test_remove_node(self):
+        pass
+
+    def test_remove_edge(self):
+        pass
