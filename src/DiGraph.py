@@ -1,8 +1,14 @@
 import random
 import sys
 
-from GraphInterface import GraphInterface
+from src.GraphInterface import GraphInterface
 from src import Node, Edge
+
+""" Nodes: { node_id : Node }
+    edgesIn: { node1_id : { node2_id : weight } }
+    edgesOut: { node1_id : { node2_id : weight } }
+    allEdges: { "node1_id , node2_id": Edge() }  
+"""
 
 
 class DiGraph(GraphInterface):
@@ -18,7 +24,7 @@ class DiGraph(GraphInterface):
         self.minY = sys.float_info.max
         self.minZ = sys.float_info.max
         self.maxZ = sys.float_info.min
-        self.init_min_max()
+        self.init_min_max()  # Initialize range to random determine x,y,z values for empty Node()
 
     def set_nodes(self, nodes: dict):
         self.nodes = nodes
@@ -33,7 +39,7 @@ class DiGraph(GraphInterface):
         self.edgesOut = q
 
     def init_min_max(self):
-        for k, v in self.nodes:
+        for k, v in self.nodes.items():
             if (v.get_x() > self.maxX): self.maxX = v.get_x()
             if (v.get_x() < self.minX): self.minX = v.get_x()
             if (v.get_y() > self.maxY): self.maxY = v.get_y()
@@ -64,25 +70,22 @@ class DiGraph(GraphInterface):
         e = Edge(self.nodes.get(id1), self.nodes.get(id2), weight)
         s = id1 + "," + id2
         if s in self.allEdges:
-            if e == self.allEdges.get(s):
+            if weight == self.allEdges.get(s):
                 return False
             else:
-                self.allEdges.pop(s)
-                self.allEdges.update({s: e})
-                self.edgesOut.get(id1).pop(id2)
-                self.edgesOut.get(id1).update({id2: e})
-                self.edgesIn.get(id2).pop(id1)
-                self.edgesIn.get(id2).update({id1: e})
+                self.allEdges.update({s: weight})
+                self.edgesOut.get(id1).update({id2: weight})
+                self.edgesIn.get(id2).update({id1: weight})
         else:
-            self.allEdges.update({s: e})
+            self.allEdges.update({s: weight})
             if id1 in self.edgesOut:
-                self.edgesOut.get(id1).update({id2: e})
+                self.edgesOut.get(id1).update({id2: weight})
             else:
-                self.edgesOut.update({id1: {id2: e}})
+                self.edgesOut.update({id1: {id2: weight}})
             if id2 in self.edgesIn:
-                self.edgesIn.get(id2).update({id1: e})
+                self.edgesIn.get(id2).update({id1: weight})
             else:
-                self.edgesIn.update({id2: {id1: e}})
+                self.edgesIn.update({id2: {id1: weight}})
         self.mc += 1
         return True
 

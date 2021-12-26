@@ -19,16 +19,19 @@ class GraphInterface:
         """return a dictionary of all the nodes in the Graph, each node is represented using a pair
          (node_id, node_data)
         """
+        raise NotImplementedError
 
     def all_in_edges_of_node(self, id1: int) -> dict:
         """return a dictionary of all the nodes connected to (into) node_id ,
         each node is represented using a pair (other_node_id, weight)
          """
+        raise NotImplementedError
 
     def all_out_edges_of_node(self, id1: int) -> dict:
         """return a dictionary of all the nodes connected from node_id , each node is represented using a pair
         (other_node_id, weight)
         """
+        raise NotImplementedError
 
     def get_mc(self) -> int:
         """

@@ -43,23 +43,23 @@ all_edges[s41] = e41
 all_edges[s43] = e43
 
 edges_out = {}
-edges_out.get(1).update({2: e12})
-edges_out.get(1).update({3: e13})
-edges_out.get(2).update({1: e21})
-edges_out.get(2).update({4: e24})
-edges_out.get(3).update({1: e31})
-edges_out.get(3).update({4: e34})
-edges_out.get(4).update({1: e41})
-edges_out.get(4).update({3: e43})
+edges_out[1] = {2: e21.weight}
+edges_out[1].update({3: e13.weight})
+edges_out[2] = {1: e21.weight}
+edges_out[2].update({4: e24.weight})
+edges_out[3] = {1: e31.weight}
+edges_out[3].update({4: e34.weight})
+edges_out[4] = {1: e41.weight}
+edges_out[4].update({3: e43.weight})
 
 edges_in = {}
-edges_in.get(1).update({2: e21})
-edges_in.get(1).update({3: e31})
-edges_in.get(1).update({4: e41})
-edges_in.get(3).update({1: e13})
-edges_in.get(3).update({4: e43})
-edges_in.get(4).update({2: e24})
-edges_in.get(4).update({3: e34})
+edges_in[1] = {2: e21.weight}
+edges_in[1].update({3: e31.weight})
+edges_in[1].update({4: e41.weight})
+edges_in[3] = {1: e13.weight}
+edges_in.get(3).update({4: e43.weight})
+edges_in[4] = {2: e24.weight}
+edges_in.get(4).update({3: e34.weight})
 
 g1 = DiGraph(Nodes, edges_in, edges_out, all_edges)
 
@@ -73,17 +73,16 @@ class TestGraph(TestCase):
 
     def test_get_all_v(self):
         nodes = g1.get_all_v()
-        self.assertEqual(n1,nodes[1])
+        self.assertEqual(n1, nodes[1])
         self.assertEqual(n2, nodes[2])
         self.assertEqual(n3, nodes[3])
         self.assertEqual(n4, nodes[4])
 
     def all_in_edges_of_node(self):
-        id=1
-        in_edges1=g1.all_in_edges_of_node(id)
-        self.assertEqual(e21, in_edges1.get())
-        self.assertEqual(e31, in_edges1[1])
-        self.assertEqual(e41, in_edges1[1])
+        data = g1.all_in_edges_of_node(1)
+        self.assertEqual(data[2], edges_in[1].get(2))
+        self.assertEqual(data[3], edges_in[1].get(3))
+        self.assertEqual(data[4], edges_in[1].get(4))
 
     def all_out_edges_of_node(self):
         pass
