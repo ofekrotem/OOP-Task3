@@ -1,6 +1,6 @@
 import unittest
 
-from src.Node import Node
+from src.DiGraph import Node
 
 n = Node(0, 1.1, 2.2, 3.3)
 

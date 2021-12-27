@@ -1,8 +1,6 @@
 from unittest import TestCase
 
-from src.DiGraph import DiGraph
-from src.Edge import Edge
-from src.Node import Node
+from src.DiGraph import DiGraph, Edge, Node
 
 n1 = Node(1, 1.1, 2.1, 3.1)
 n2 = Node(2, 1.2, 2.2, 3.2)
@@ -78,16 +76,16 @@ class TestGraph(TestCase):
         self.assertEqual(n3, nodes[3])
         self.assertEqual(n4, nodes[4])
 
-    def all_in_edges_of_node(self):
+    def test_all_in_edges_of_node(self):
         data = g1.all_in_edges_of_node(1)
         self.assertEqual(data[2], edges_in[1].get(2))
         self.assertEqual(data[3], edges_in[1].get(3))
         self.assertEqual(data[4], edges_in[1].get(4))
 
-    def all_out_edges_of_node(self):
+    def test_all_out_edges_of_node(self):
         pass
 
-    def get_mc(self):
+    def test_get_mc(self):
         pass
 
     def test_add_edge(self):

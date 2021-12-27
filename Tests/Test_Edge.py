@@ -1,7 +1,6 @@
 from unittest import TestCase
 
-from src.Edge import Edge
-from src.Node import Node
+from src.DiGraph import Edge, Node
 
 n1 = Node(0, 1.1, 2.2, 3.3)
 n2 = Node(1, 2.2, 4.4, 6.6)

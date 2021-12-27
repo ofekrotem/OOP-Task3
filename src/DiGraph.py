@@ -1,33 +1,118 @@
+import math
 import random
 import sys
 
 from src.GraphInterface import GraphInterface
-from src import Node, Edge
 
-""" Nodes: { node_id : Node }
-    edgesIn: { node1_id : { node2_id : weight } }
-    edgesOut: { node1_id : { node2_id : weight } }
-    allEdges: { "node1_id , node2_id": Edge() }  
-"""
+
+class Node:
+    def __init__(self, id: int, x: float = None, y: float = None, z: float = None):
+        self.id = id
+        self.x = x
+        self.y = y
+        self.z = z
+        self.tag = 0
+        self.w = 0
+        self.daddy = None
+
+    def whos_my_daddy(self):
+        return self.daddy
+
+    def set_my_daddy(self, papa):
+        self.daddy = papa
+
+    def get_w(self) -> float:
+        return self.w
+
+    def set_w(self, we: float):
+        self.w = we
+
+    def get_id(self) -> int:
+        return self.id
+
+    def get_x(self) -> float:
+        return self.x
+
+    def get_y(self) -> float:
+        return self.y
+
+    def get_z(self) -> float:
+        return self.z
+
+    def get_tag(self) -> int:
+        return self.tag
+
+    def set_tag(self, n_tag: int):
+        self.tag = n_tag
+
+    def __eq__(self, other):
+        if ((self.id == other.id) and (self.tag == other.tag) and (self.x == other.x) and (self.y == other.y) and (
+                self.z == other.z)):
+            return True
+        return False
+
+    def __lt__(self, other):
+        return self.w < other.w
+
+
+class Edge:
+    def __init__(self, src: Node, dest: Node, w: float):
+        self.src = src
+        self.dest = dest
+        self.weight = w
+
+    def get_src(self) -> Node:
+        return self.src
+
+    def get_dest(self) -> Node:
+        return self.dest
+
+    def get_weight(self) -> float:
+        return self.weight
+
+    def __eq__(self, other) -> bool:
+        return self.src == other.src and self.dest == other.dest and self.weight == other.weight
 
 
 class DiGraph(GraphInterface):
-    def __init__(self, nodes: dict, edgesIn: dict, edgesOut: dict, allEdges: dict):
+    """ Nodes: { node_id : Node }
+        edgesIn: { node1_id : { node2_id : weight } }
+        edgesOut: { node1_id : { node2_id : weight } }
+        allEdges: { "node1_id , node2_id": Edge() }
+    """
+
+    def __init__(self, nodes: dict = {}, edgesIn: dict = {}, edgesOut: dict = {}, allEdges: dict = {}):
         self.nodes = nodes
         self.edgesIn = edgesIn
         self.edgesOut = edgesOut
         self.mc = 0
         self.allEdges = allEdges
-        self.maxX = sys.float_info.min
-        self.maxY = sys.float_info.min
-        self.minX = sys.float_info.max
-        self.minY = sys.float_info.max
-        self.minZ = sys.float_info.max
-        self.maxZ = sys.float_info.min
-        self.init_min_max()  # Initialize range to random determine x,y,z values for empty Node()
+        self.maxX = 100
+        self.maxY = 100
+        self.minX = 0
+        self.minY = 0
+        self.minZ = 0
+        self.maxZ = 100
+        if len(self.nodes) > 0:
+            self.init_min_max()  # Initialize range to random determine x,y,z values for empty Node()
+
+    def makeTagsZero(self):
+        for k, n in self.nodes.items():
+            n.set_tag(0)
+
+    def DijkstraPrep(self, src: int):
+        for k, n in self.nodes.items():
+            if k == src:
+                self.nodes.get(k).set_w(0)
+            else:
+                self.nodes.get(k).set_w(math.inf)
+
+    def get_allEdges(self) -> dict:
+        return self.allEdges
 
     def set_nodes(self, nodes: dict):
         self.nodes = nodes
+        self.init_min_max()
 
     def set_allEdges(self, all: dict):
         self.allEdges = all
@@ -39,6 +124,13 @@ class DiGraph(GraphInterface):
         self.edgesOut = q
 
     def init_min_max(self):
+        if (len(self.nodes) == 2):
+            self.maxX = self.nodes.get(0).get_x()
+            self.maxY = self.nodes.get(0).get_y()
+            self.minX = self.nodes.get(1).get_x()
+            self.minY = self.nodes.get(1).get_y()
+            self.minZ = self.nodes.get(1).get_z()
+            self.maxZ = self.nodes.get(0).get_z()
         for k, v in self.nodes.items():
             if (v.get_x() > self.maxX): self.maxX = v.get_x()
             if (v.get_x() < self.minX): self.minX = v.get_x()
@@ -68,7 +160,7 @@ class DiGraph(GraphInterface):
     def add_edge(self, id1: int, id2: int, weight: float) -> bool:
         if (not id1 in self.nodes or not id2 in self.nodes): return False
         e = Edge(self.nodes.get(id1), self.nodes.get(id2), weight)
-        s = id1 + "," + id2
+        s = str(id1) + "," + str(id2)
         if s in self.allEdges:
             if weight == self.allEdges.get(s):
                 return False
@@ -114,11 +206,12 @@ class DiGraph(GraphInterface):
                 self.edgesOut.pop(node_id)
             if node_id in self.edgesIn:
                 self.edgesIn.pop(node_id)
+        self.init_min_max()
         self.mc += 1
         return True
 
     def remove_edge(self, node_id1: int, node_id2: int) -> bool:
-        s = node_id1 + "," + node_id2
+        s = str(node_id1) + "," + str(node_id2)
         if s not in self.allEdges:
             return False
         else:
