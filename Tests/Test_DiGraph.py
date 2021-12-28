@@ -83,19 +83,25 @@ class TestGraph(TestCase):
         self.assertEqual(data[4], edges_in[1].get(4))
 
     def test_all_out_edges_of_node(self):
-        pass
+        data = g1.all_out_edges_of_node(3)
+        self.assertEqual(data[1], edges_out[3].get(1))
+        self.assertEqual(data[4], edges_out[3].get(4))
 
     def test_get_mc(self):
-        pass
+        self.assertEqual(0, g1.get_mc())
 
     def test_add_edge(self):
-        pass
+        self.assertEqual(False, g1.add_edge(1, 2, 1.12))
+        self.assertEqual(True, g1.add_edge(1, 4, 1.14))
 
     def test_add_node(self):
-        pass
+        self.assertEqual(False, g1.add_node(1))
+        self.assertEqual(True, g1.add_node(5, (12, 12, 12)))
 
     def test_remove_node(self):
-        pass
+        self.assertEqual(False, g1.remove_node(15))
+        self.assertEqual(True, g1.remove_node(2))
 
     def test_remove_edge(self):
-        pass
+        self.assertEqual(True, g1.remove_edge(1, 2))
+        self.assertEqual(False, g1.remove_edge(1, 4))

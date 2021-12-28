@@ -4,10 +4,13 @@ import math
 import os.path
 import random
 from typing import List
+
 import matplotlib.pyplot as plt
-from GraphAlgoInterface import GraphAlgoInterface
-from GraphInterface import GraphInterface
-from DiGraph import Node, Edge, DiGraph
+
+from src.DiGraph import Node, Edge, DiGraph
+from src.GraphAlgoInterface import GraphAlgoInterface
+from src.GraphInterface import GraphInterface
+from src import Window
 
 
 class GraphAlgo(GraphAlgoInterface):
@@ -190,25 +193,32 @@ class GraphAlgo(GraphAlgoInterface):
             if the nodes have a position, the nodes will be placed there.
             Otherwise, they will be placed in a random but elegant manner.
             @return: None """
-        graph_nodes = self.graph.get_all_v()
-        for i, n in graph_nodes.items():
-            plt.plot(graph_nodes.get(i).get_x(), graph_nodes.get(i).get_y(), ".", markersize=15, color="blue")
-            plt.text(graph_nodes.get(i).get_x() * 1.000007, graph_nodes.get(i).get_y() * 1.000007, str(n.get_id()),
-                     color="red", fontsize=10)
+        """
+        nodes = self.graph.get_all_v()
+        for i, n in nodes.items():
+            node_x = nodes.get(i).get_x()
+            node_y = nodes.get(i).get_y()
+            text_x = node_x * 1.000007
+            text_y = node_y * 1.000007
+            plt.plot(node_x, node_y, ".", markersize=15, color="blue")
+            plt.text(text_x, text_y, str(n.get_id()), color="red", fontsize=12)
 
-        for src in graph_nodes.keys():
+        for src in nodes.keys():
             if self.graph.all_out_edges_of_node(src) is not None:
                 for dest in self.graph.all_out_edges_of_node(src).keys():
-                    plt.annotate("", xy=(graph_nodes.get(src).get_x(), graph_nodes[src].get_y()),
-                                 xytext=(graph_nodes[dest].get_x(), graph_nodes[dest].get_y()),
+                    node_x = nodes.get(src).get_x()
+                    node_y = nodes[src].get_y()
+                    plt.annotate("", xy=(node_x, node_y), xytext=(nodes[dest].get_x(), nodes[dest].get_y()),
                                  arrowprops=dict(arrowstyle="<-"))
         plt.show()
+        """
+        Window.game(self)
 
 
 if __name__ == '__main__':
     graph = DiGraph()
     algo = GraphAlgo(graph)
-    algo.load_from_json(r"../data/T0.json")
+    algo.load_from_json(r"../data/A3.json")
     algo.save_to_json("test.json")
     ls = [0, 2]
     ans = algo.shortest_path(0, 2)

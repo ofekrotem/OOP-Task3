@@ -162,12 +162,18 @@ class DiGraph(GraphInterface):
         e = Edge(self.nodes.get(id1), self.nodes.get(id2), weight)
         s = str(id1) + "," + str(id2)
         if s in self.allEdges:
-            if weight == self.allEdges.get(s):
+            if weight == self.allEdges.get(s).get_weight():
                 return False
             else:
                 self.allEdges.update({s: weight})
-                self.edgesOut.get(id1).update({id2: weight})
-                self.edgesIn.get(id2).update({id1: weight})
+                if self.edgesOut.get(id1) is not None:
+                    self.edgesOut.get(id1).update({id2: weight})
+                else:
+                    self.edgesOut[id1]={id2: weight}
+                if self.edgesIn.get(id2) is not None:
+                    self.edgesIn.get(id2).update({id1: weight})
+                else:
+                    self.edgesIn[id2]={id1,weight}
         else:
             self.allEdges.update({s: weight})
             if id1 in self.edgesOut:
@@ -216,6 +222,9 @@ class DiGraph(GraphInterface):
             return False
         else:
             self.allEdges.pop(s)
-            self.edgesOut.get(node_id1).pop(node_id2)
-            self.edgesIn.get(node_id2).pop(node_id1)
+            if self.edgesOut.get(node_id1) is not None:
+                self.edgesOut.get(node_id1).pop(node_id2)
+            if self.edgesIn.get(node_id2) is not None:
+                self.edgesIn.get(node_id2).pop(node_id1)
             self.mc += 1
+            return True
