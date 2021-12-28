@@ -11,17 +11,17 @@ This project is about implementing algorithms on directed weighted graphs.
 
 ## Graph Plot Screenshots
 ### Graph A0:
-![App Screenshot](Pics for README/A0_Plot.jpeg?text=A0+PLOT)
+![App Screenshot](A0_Plot.jpeg?text=A0+PLOT)
 ### Graph A1:
-![App Screenshot](Pics for README/A1_Plot.jpeg?text=A1+PLOT)
+![App Screenshot](A1_Plot.jpeg?text=A1+PLOT)
 ### Graph A2:
-![App Screenshot](Pics for README/A2_Plot.jpeg?text=A2+PLOT)
+![App Screenshot](A2_Plot.jpeg?text=A2+PLOT)
 ### Graph A3:
-![App Screenshot](Pics for README/A3_Plot.jpeg?text=A3+PLOT)
+![App Screenshot](A3_Plot.jpeg?text=A3+PLOT)
 ### Graph A4:
-![App Screenshot](Pics for README/A4_Plot.jpeg?text=A4+PLOT)
+![App Screenshot](A4_Plot.jpeg?text=A4+PLOT)
 ### Graph A5:
-![App Screenshot](Pics for README/A5_Plot.jpeg?text=A5+PLOT)
+![App Screenshot](A5_Plot.jpeg?text=A5+PLOT)
 
 ## Class Explanations
 ### Node:
@@ -53,4 +53,4 @@ It includes these main functions:
 - plot_graph(self): Plots the graph.
 
 ## UML Diagram
-![UML](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![UML](UML.jpeg?text=UML)
