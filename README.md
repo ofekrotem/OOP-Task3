@@ -52,4 +52,4 @@ It includes these main functions:
 ![App Screenshot](A5_Plot.jpeg?text=A5+PLOT)
 
 ## UML Diagram
-![UML](UML.jpeg?text=UML)
+![UML](UML.JPEG?text=UML)
