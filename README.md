@@ -1,7 +1,7 @@
 
 # Traveling Salesman Problem
 OOP Course Ariel University - Task 3.
-
+This project is about implementing algorithms on directed weighted graphs.
 
 ## Authors
 
@@ -9,45 +9,19 @@ OOP Course Ariel University - Task 3.
 - Yonatan Tal
 
 
-## Graph Plot Screenshots & Times
+## Graph Plot Screenshots
 ### Graph A0:
-#### Function Times:
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-#### Graph Plot:
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](Pics for README/A0_Plot.jpeg?text=A0+PLOT)
 ### Graph A1:
-#### Function Times:
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-#### Graph Plot:
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](Pics for README/A1_Plot.jpeg?text=A1+PLOT)
 ### Graph A2:
-#### Function Times:
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-#### Graph Plot:
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](Pics for README/A2_Plot.jpeg?text=A2+PLOT)
 ### Graph A3:
-#### Function Times:
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-#### Graph Plot:
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](Pics for README/A3_Plot.jpeg?text=A3+PLOT)
 ### Graph A4:
-#### Function Times:
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-#### Graph Plot:
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](Pics for README/A4_Plot.jpeg?text=A4+PLOT)
 ### Graph A5:
-#### Function Times:
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-#### Graph Plot:
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-
-## How to run project .exe file
-In order to run the project JAR file follow the following steps:  
-1. Download JAR file from this github page (Ex2.jar).
-2. Insert the JAR and the json file to a folder and run CMD from this folder.
-3. In the CMD write this command: java -jar Ex2.jar <The Json file you want the GUI to run with>.  
-4. Enjoy :)
+![App Screenshot](Pics for README/A5_Plot.jpeg?text=A5+PLOT)
 
 ## Class Explanations
 ### Node:
@@ -79,4 +53,4 @@ It includes these main functions:
 - plot_graph(self): Plots the graph.
 
 ## UML Diagram
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![UML](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
