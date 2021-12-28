@@ -8,21 +8,6 @@ This project is about implementing algorithms on directed weighted graphs.
 - Ofek Rotem
 - Yonatan Tal
 
-
-## Graph Plot Screenshots
-### Graph A0:
-![App Screenshot](A0_Plot.jpeg?text=A0+PLOT)
-### Graph A1:
-![App Screenshot](A1_Plot.jpeg?text=A1+PLOT)
-### Graph A2:
-![App Screenshot](A2_Plot.jpeg?text=A2+PLOT)
-### Graph A3:
-![App Screenshot](A3_Plot.jpeg?text=A3+PLOT)
-### Graph A4:
-![App Screenshot](A4_Plot.jpeg?text=A4+PLOT)
-### Graph A5:
-![App Screenshot](A5_Plot.jpeg?text=A5+PLOT)
-
 ## Class Explanations
 ### Node:
 This class reperesents a node in the graph and includes a unique ID for each node and its Location (x,y,z).
@@ -51,6 +36,20 @@ It includes these main functions:
 - TSP(node_lst: List[int]) -> (List[int], float): Finds the shortest path that visits all the nodes in the list and returns a list of the nodes id's in the path, and the overall distance.
 - centerPoint() -> (int, float): Finds the node that has the shortest distance to it's farthest node and returns the nodes id, min-maximum distance.
 - plot_graph(self): Plots the graph.
+
+## Graph Plot Screenshots
+### Graph A0:
+![App Screenshot](A0_Plot.jpeg?text=A0+PLOT)
+### Graph A1:
+![App Screenshot](A1_Plot.jpeg?text=A1+PLOT)
+### Graph A2:
+![App Screenshot](A2_Plot.jpeg?text=A2+PLOT)
+### Graph A3:
+![App Screenshot](A3_Plot.jpeg?text=A3+PLOT)
+### Graph A4:
+![App Screenshot](A4_Plot.jpeg?text=A4+PLOT)
+### Graph A5:
+![App Screenshot](A5_Plot.jpeg?text=A5+PLOT)
 
 ## UML Diagram
 ![UML](UML.jpeg?text=UML)
