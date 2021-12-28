@@ -4,13 +4,11 @@ import math
 import os.path
 import random
 from typing import List
-
 import matplotlib.pyplot as plt
 
 from src.DiGraph import Node, Edge, DiGraph
 from src.GraphAlgoInterface import GraphAlgoInterface
 from src.GraphInterface import GraphInterface
-from src import Window
 
 
 class GraphAlgo(GraphAlgoInterface):
@@ -20,8 +18,8 @@ class GraphAlgo(GraphAlgoInterface):
     def get_graph(self) -> GraphInterface:
         return self.graph;
 
-    def set_graph(self, g:GraphInterface):
-        self.graph=g
+    def set_graph(self, g: GraphInterface):
+        self.graph = g
 
     def load_from_json(self, file_name: str) -> bool:
         file_path = os.path.join(file_name)
@@ -47,7 +45,7 @@ class GraphAlgo(GraphAlgoInterface):
                     y = random.uniform(self.graph.minY, self.graph.maxY)
                     z = random.uniform(self.graph.minZ, self.graph.maxZ)
                 else:
-                    x= random.uniform(0,100)
+                    x = random.uniform(0, 100)
                     y = random.uniform(0, 100)
                     z = random.uniform(0, 100)
             Nid = int(n.pop("id"))
@@ -73,7 +71,7 @@ class GraphAlgo(GraphAlgoInterface):
             else:
                 edgesIn.update({dest: {src: w}})
         if self.graph is None:
-            g=DiGraph(Nodes,edgesIn,edgesOut,allEdges)
+            g = DiGraph(Nodes, edgesIn, edgesOut, allEdges)
             self.set_graph(g)
         else:
             self.get_graph().set_nodes(Nodes)
@@ -198,11 +196,11 @@ class GraphAlgo(GraphAlgoInterface):
         return index, maxdist
 
     def plot_graph(self) -> None:
-        """ plots the graph.
+        """     plots the graph.
             if the nodes have a position, the nodes will be placed there.
             Otherwise, they will be placed in a random but elegant manner.
             @return: None """
-        """
+
         nodes = self.graph.get_all_v()
         for i, n in nodes.items():
             node_x = nodes.get(i).get_x()
@@ -220,19 +218,5 @@ class GraphAlgo(GraphAlgoInterface):
                     plt.annotate("", xy=(node_x, node_y), xytext=(nodes[dest].get_x(), nodes[dest].get_y()),
                                  arrowprops=dict(arrowstyle="<-"))
         plt.show()
-        """
-        Window.run(self)
 
 
-if __name__ == '__main__':
-    graph = DiGraph()
-    algo = GraphAlgo(graph)
-    algo.load_from_json(r"../data/A3.json")
-    algo.save_to_json("test.json")
-    ls = [0, 2]
-    ans = algo.shortest_path(0, 2)
-    print(ans)
-    ans = algo.TSP(ls)
-    print(ans)
-    print(algo.centerPoint())
-    algo.plot_graph()
