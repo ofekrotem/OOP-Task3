@@ -1,6 +1,5 @@
 import math
 import random
-import sys
 
 from src.GraphInterface import GraphInterface
 
@@ -100,6 +99,9 @@ class DiGraph(GraphInterface):
         for k, n in self.nodes.items():
             n.set_tag(0)
 
+    def get_min_max(self) -> (float, float, float, float):
+        return self.minX, self.maxX, self.minY, self.maxY
+
     def DijkstraPrep(self, src: int):
         for k, n in self.nodes.items():
             if k == src:
@@ -169,11 +171,11 @@ class DiGraph(GraphInterface):
                 if self.edgesOut.get(id1) is not None:
                     self.edgesOut.get(id1).update({id2: weight})
                 else:
-                    self.edgesOut[id1]={id2: weight}
+                    self.edgesOut[id1] = {id2: weight}
                 if self.edgesIn.get(id2) is not None:
                     self.edgesIn.get(id2).update({id1: weight})
                 else:
-                    self.edgesIn[id2]={id1,weight}
+                    self.edgesIn[id2] = {id1, weight}
         else:
             self.allEdges.update({s: weight})
             if id1 in self.edgesOut:

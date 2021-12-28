@@ -20,10 +20,11 @@ class GraphAlgo(GraphAlgoInterface):
     def get_graph(self) -> GraphInterface:
         return self.graph;
 
+    def set_graph(self, g:GraphInterface):
+        self.graph=g
+
     def load_from_json(self, file_name: str) -> bool:
-        print(file_name)
         file_path = os.path.join(file_name)
-        print(file_path)
         """
         Convert json file to python list
         :param file: file name
@@ -41,13 +42,17 @@ class GraphAlgo(GraphAlgoInterface):
                 y = float(p[1])
                 z = float(p[2])
             else:
-                x = random.uniform(self.graph.minX, self.graph.maxX)
-                y = random.uniform(self.graph.minY, self.graph.maxY)
-                z = random.uniform(self.graph.minZ, self.graph.maxZ)
+                if self.graph is not None:
+                    x = random.uniform(self.graph.minX, self.graph.maxX)
+                    y = random.uniform(self.graph.minY, self.graph.maxY)
+                    z = random.uniform(self.graph.minZ, self.graph.maxZ)
+                else:
+                    x= random.uniform(0,100)
+                    y = random.uniform(0, 100)
+                    z = random.uniform(0, 100)
             Nid = int(n.pop("id"))
             nodee = Node(Nid, x, y, z)
             Nodes.update({Nid: nodee})
-            self.graph.set_nodes(Nodes)
         allEdges = {}
         edgesIn = {}
         edgesOut = {}
@@ -67,10 +72,14 @@ class GraphAlgo(GraphAlgoInterface):
                 edgesIn.get(dest).update({src: w})
             else:
                 edgesIn.update({dest: {src: w}})
-        self.graph.set_nodes(Nodes)
-        self.graph.set_allEdges(allEdges)
-        self.graph.set_edgesIn(edgesIn)
-        self.graph.set_edgesOut(edgesOut)
+        if self.graph is None:
+            g=DiGraph(Nodes,edgesIn,edgesOut,allEdges)
+            self.set_graph(g)
+        else:
+            self.get_graph().set_nodes(Nodes)
+            self.graph.set_allEdges(allEdges)
+            self.graph.set_edgesIn(edgesIn)
+            self.graph.set_edgesOut(edgesOut)
 
     def save_to_json(self, file_name: str) -> bool:
         nodes = []
@@ -212,7 +221,7 @@ class GraphAlgo(GraphAlgoInterface):
                                  arrowprops=dict(arrowstyle="<-"))
         plt.show()
         """
-        Window.game(self)
+        Window.run(self)
 
 
 if __name__ == '__main__':
