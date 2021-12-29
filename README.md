@@ -7,7 +7,13 @@ This project is about implementing algorithms on directed weighted graphs.
 
 - Ofek Rotem
 - Yonatan Tal
-
+## How to run project from cmd/terminal:
+In order to run the project follow the following steps:  
+1. Download project .zip to your computer(Code -> Download ZIP).
+2. Extract project to a folder and enter cmd/terminal from this folder.
+3. Copy/insert a graph json file to the folder(Examples are in "data" folder).
+4. In the cmd/terminal write this command: python Ex3.py <graph_name.json>. In case no graph json file is given, the program will create three default graphs.
+5. Enjoy :)
 ## Class Explanations
 ### Node:
 This class reperesents a node in the graph and includes a unique ID for each node and its Location (x,y,z).
